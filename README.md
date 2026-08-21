@@ -333,17 +333,25 @@ Model performance will be evaluated using:
 
 Final experimental results will be added after completing model training.
 
-## 👥 Team Contributions
+## 👥 Team Details
 
-The project is divided into five major modules:
+### Project Team
 
-| Member       | Responsibility                                     |
-| ------------ | -------------------------------------------------- |
-| **Member 1** | Machine Learning & Deep Learning                   |
-| **Member 2** | Frontend & Dashboard                               |
-| **Member 3** | Backend & API Integration                          |
-| **Member 4** | Dataset, Feature Extraction & Live Traffic Capture |
-| **Member 5** | Testing, Documentation & System Integration        |
+| S. No. | Team Member        | Role / Responsibility                              |
+| -----: | ------------------ | -------------------------------------------------- |
+|      1 | **Manmeet Kaur**   | Machine Learning & Deep Learning                   |
+|      2 | **Aradhya Joshi**  | Frontend & Dashboard Development                   |
+|      3 | **Adheesh Negi**   | Backend & API Integration                          |
+|      4 | **Asheesh Mishra** | Dataset, Feature Extraction & Live Traffic Capture |
+|      5 | **Jasmine**        | Testing, Documentation & System Integration        |
+
+### 👨‍🏫 Project Mentor
+
+**Surjit Singh**
+Thapar Institute of Engineering & Technology
+Email: **[surjit.singh@thapar.edu](mailto:surjit.singh@thapar.edu)**
+
+---
 
 ## 🔄 Development Workflow
 
