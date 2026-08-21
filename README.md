@@ -341,7 +341,7 @@ Final experimental results will be added after completing model training.
 | -----: | ------------------ | -------------------------------------------------- |
 |      1 | **Manmeet Kaur**   | Machine Learning & Deep Learning                   |
 |      2 | **Aradhya Joshi**  | Frontend & Dashboard Development                   |
-|      3 | **Adheesh Negi**   | Backend & API Integration                          |
+|      3 | **Adheesh Negi**   | Testing and System Integration                          |
 |      4 | **Asheesh Mishra** | Dataset, Feature Extraction & Live Traffic Capture |
 |      5 | **Jasmine**        | Testing, Documentation & System Integration        |
 
