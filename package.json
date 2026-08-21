@@ -1,0 +1,31 @@
+{
+  "name": "5g-network-security-system",
+  "version": "1.0.0",
+  "description": "5G Network Security Intrusion Detection System with ML-powered threat classification and real-time dashboard",
+  "private": true,
+  "scripts": {
+    "setup": "cd backend && npm install",
+    "setup:ml": "pip install -r ml-pipeline/requirements.txt",
+    "setup:all": "npm run setup && npm run setup:ml",
+    "generate-data": "cd ml-pipeline && python generate_dataset.py",
+    "train": "cd ml-pipeline && python train_model.py",
+    "ml:all": "npm run generate-data && npm run train",
+    "start": "cd backend && node server.js",
+    "dev": "cd backend && npx nodemon server.js",
+    "full-setup": "npm run setup:all && npm run ml:all",
+    "demo": "npm run ml:all && npm run start"
+  },
+  "keywords": [
+    "5g",
+    "network-security",
+    "intrusion-detection",
+    "machine-learning",
+    "open5gs",
+    "ueransim",
+    "random-forest",
+    "xgboost",
+    "dashboard"
+  ],
+  "author": "",
+  "license": "MIT"
+}
