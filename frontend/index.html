@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5G Network Security IDS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body class="dark-theme">
+    <div class="dashboard-container">
+        <header class="top-header fade-in">
+            <div class="logo-area">
+                <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <div class="title-container">
+                    <h1>5G Network Security</h1>
+                    <span class="subtitle">Intrusion Detection System Command Center</span>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <div class="system-status">
+                    <div class="status-indicator active" id="sys-status-dot"></div>
+                    <span id="sys-status-text">System Active</span>
+                </div>
+                <div class="clock-display" id="clock">00:00:00</div>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            
+            <section class="panel topology-panel fade-in span-2-cols" style="animation-delay: 0.1s;">
+                <header class="panel-header">
+                    <h2>Network Topology</h2>
+                    <div class="panel-actions">
+                        <span class="badge">Live View</span>
+                    </div>
+                </header>
+                <div class="panel-content topology-container">
+                    <svg viewBox="0 0 800 200" class="topology-svg" id="topology-svg">
+                        <defs>
+                            <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="4" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                            <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="5" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        <path class="conn-line" d="M 80 100 L 220 100" id="line-ue-gnb"/>
+                        <path class="conn-line" d="M 220 100 L 360 100" id="line-gnb-amf"/>
+                        <path class="conn-line" d="M 360 100 L 500 100" id="line-amf-smf"/>
+                        <path class="conn-line" d="M 500 100 L 640 100" id="line-smf-upf"/>
+                        <path class="conn-line" d="M 640 100 L 750 100" id="line-upf-ml"/>
+                        
+                        <g class="node active" id="node-ue" transform="translate(40, 75)">
+                            <rect width="80" height="50" rx="8" class="node-rect" filter="url(#glow-cyan)"/>
+                            <text x="40" y="30" text-anchor="middle" class="node-text">UE</text>
+                        </g>
+                        <g class="node active" id="node-gnb" transform="translate(180, 75)">
+                            <rect width="80" height="50" rx="8" class="node-rect" filter="url(#glow-cyan)"/>
+                            <text x="40" y="30" text-anchor="middle" class="node-text">gNB</text>
+                        </g>
+                        <g class="node active" id="node-amf" transform="translate(320, 75)">
+                            <rect width="80" height="50" rx="8" class="node-rect" filter="url(#glow-cyan)"/>
+                            <text x="40" y="30" text-anchor="middle" class="node-text">AMF</text>
+                        </g>
+                        <g class="node active" id="node-smf" transform="translate(460, 75)">
+                            <rect width="80" height="50" rx="8" class="node-rect" filter="url(#glow-cyan)"/>
+                            <text x="40" y="30" text-anchor="middle" class="node-text">SMF</text>
+                        </g>
+                        <g class="node active" id="node-upf" transform="translate(600, 75)">
+                            <rect width="80" height="50" rx="8" class="node-rect" filter="url(#glow-cyan)"/>
+                            <text x="40" y="30" text-anchor="middle" class="node-text">UPF</text>
+                        </g>
+                        <g class="node ml-node" id="node-ml" transform="translate(710, 75)">
+                            <rect width="80" height="50" rx="8" class="node-rect" filter="url(#glow-cyan)"/>
+                            <text x="40" y="30" text-anchor="middle" class="node-text">ML IDS</text>
+                        </g>
+                    </svg>
+                </div>
+            </section>
+
+            <section class="panel stats-panel fade-in" style="animation-delay: 0.2s;">
+                <header class="panel-header">
+                    <h2>System Stats</h2>
+                </header>
+                <div class="panel-content stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Total Packets</div>
+                        <div class="stat-value" id="stat-packets">0</div>
+                    </div>
+                    <div class="stat-card danger-stat">
+                        <div class="stat-title">Threats Detected</div>
+                        <div class="stat-value" id="stat-threats">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Model Accuracy</div>
+                        <div class="stat-value" id="stat-accuracy">99.8%</div>
+                        <div class="progress-ring-container">
+                           <svg viewBox="0 0 36 36" class="circular-chart cyan">
+                              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                              <path class="circle" stroke-dasharray="99.8, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                           </svg>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Uptime</div>
+                        <div class="stat-value" id="stat-uptime">00:00:00</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel feed-panel fade-in span-2-cols" style="animation-delay: 0.3s;">
+                <header class="panel-header">
+                    <h2>Live Traffic Feed</h2>
+                </header>
+                <div class="panel-content table-container">
+                    <table class="traffic-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Source IP</th>
+                                <th>Protocol</th>
+                                <th>Size</th>
+                                <th>Classification</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="traffic-feed-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel chart-panel fade-in" style="animation-delay: 0.4s;">
+                <header class="panel-header">
+                    <h2>Threat Distribution</h2>
+                </header>
+                <div class="panel-content chart-container">
+                    <canvas id="threatDoughnutChart"></canvas>
+                    <div class="chart-center-text" id="threat-total">0</div>
+                </div>
+            </section>
+
+            <section class="panel timeline-panel fade-in span-2-cols" style="animation-delay: 0.5s;">
+                <header class="panel-header">
+                    <h2>Traffic Timeline</h2>
+                </header>
+                <div class="panel-content chart-container timeline-chart-wrapper">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+            </section>
+
+            <section class="panel model-panel fade-in" style="animation-delay: 0.6s;">
+                <header class="panel-header">
+                    <h2>Model Performance</h2>
+                </header>
+                <div class="panel-content chart-container">
+                    <canvas id="modelBarChart"></canvas>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
