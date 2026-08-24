@@ -1,1 +1,12 @@
-["packet_size", "flow_duration", "packet_rate", "byte_rate", "protocol_type", "src_port", "dst_port", "flag_count", "iat_mean", "payload_entropy"]
+[
+    "packet_size",
+    "flow_duration",
+    "packet_rate",
+    "byte_rate",
+    "protocol_type",
+    "src_port",
+    "dst_port",
+    "flag_count",
+    "iat_mean",
+    "payload_entropy"
+]
