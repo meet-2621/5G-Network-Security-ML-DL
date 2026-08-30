@@ -239,11 +239,11 @@ class MLService {
     }
 
     const probabilities = {
-      normal: 0.1,
-      ddos: 0.1,
-      port_scan: 0.1,
-      dns_spoof: 0.1,
-      mitm: 0.1
+      normal: 0.025,
+      ddos: 0.025,
+      port_scan: 0.025,
+      dns_spoof: 0.025,
+      mitm: 0.025
     };
 
     probabilities[prediction] = 0.9;
