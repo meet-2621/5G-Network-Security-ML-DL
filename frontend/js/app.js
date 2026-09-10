@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('[App] Failed to load initial data:', err);
     }
 
-    const socket = io('http://localhost:3000');
+    const socket = io();
 
     socket.on('connect', () => {
         state.connected = true;
