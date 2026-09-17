@@ -340,10 +340,10 @@ Final experimental results will be added after completing model training.
 | S. No. | Team Member        | Role / Responsibility                              |
 | -----: | ------------------ | -------------------------------------------------- |
 |      1 | **Manmeet Kaur**   | Machine Learning & Deep Learning                   |
-|      2 | **Aradhya Joshi**  | Frontend & Dashboard Development                   |
+|      2 | **Jasmine**        | Frontend & Dashboard Development                   |
 |      3 | **Adheesh Negi**   | Testing and System Integration                          |
 |      4 | **Asheesh Mishra** | Dataset, Feature Extraction & Live Traffic Capture |
-|      5 | **Jasmine**        | Testing, Documentation & System Integration        |
+|      5 | **Aradhya Joshi**  | Testing, Documentation & System Integration        |
 
 ### 👨‍🏫 Project Mentor
 
