@@ -1,4 +1,4 @@
-# 5G Network Security using ML & DL
+# CPSS Group: 5G Network Security using ML & DL
 
 An AI-powered 5G network security system designed to detect and classify network attacks using **Machine Learning (ML), Deep Learning (DL), network traffic analysis, and an interactive web dashboard**.
 
