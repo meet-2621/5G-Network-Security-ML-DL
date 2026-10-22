@@ -1,6 +1,25 @@
-# CPSS Group: 5G Network Security using ML & DL
+# CPSS Group Project: 5G Network Security using ML & DL
 
 An AI-powered 5G network security system designed to detect and classify network attacks using **Machine Learning (ML), Deep Learning (DL), network traffic analysis, and an interactive web dashboard**.
+
+## 👥 Team Details
+
+### Project Team
+
+| S. No. | Team Member        | Role / Responsibility                              |
+| -----: | ------------------ | -------------------------------------------------- |
+|      1 | **Manmeet Kaur**   | Machine Learning & Deep Learning                   |
+|      2 | **Jasmine**        | Frontend & Dashboard Development                   |
+|      3 | **Adheesh Negi**   | Testing and System Integration                          |
+|      4 | **Asheesh Mishra** | Dataset, Feature Extraction & Live Traffic Capture |
+|      5 | **Aradhya Joshi**  | Testing, Documentation & System Integration        |
+
+### 👨‍🏫 Project Supervisor
+
+**Dr. Surjit Singh**
+Department of Computer Science & Engineering
+Thapar Institute of Engineering & Technology
+Email: **[surjit.singh@thapar.edu](mailto:surjit.singh@thapar.edu)**
 
 ## 📌 Overview
 
@@ -332,24 +351,6 @@ Model performance will be evaluated using:
 | Confusion Matrix | Detailed class-wise prediction performance       |
 
 Final experimental results will be added after completing model training.
-
-## 👥 Team Details
-
-### Project Team
-
-| S. No. | Team Member        | Role / Responsibility                              |
-| -----: | ------------------ | -------------------------------------------------- |
-|      1 | **Manmeet Kaur**   | Machine Learning & Deep Learning                   |
-|      2 | **Jasmine**        | Frontend & Dashboard Development                   |
-|      3 | **Adheesh Negi**   | Testing and System Integration                          |
-|      4 | **Asheesh Mishra** | Dataset, Feature Extraction & Live Traffic Capture |
-|      5 | **Aradhya Joshi**  | Testing, Documentation & System Integration        |
-
-### 👨‍🏫 Project Mentor
-
-**Surjit Singh**
-Thapar Institute of Engineering & Technology
-Email: **[surjit.singh@thapar.edu](mailto:surjit.singh@thapar.edu)**
 
 ---
 
