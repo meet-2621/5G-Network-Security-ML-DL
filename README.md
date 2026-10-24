@@ -1,4 +1,4 @@
-# Cyber Physical Systems & Security (CPSS) Group Project: 
+# Cyber Physical Systems & Security (CPSS) Group
 
 Title of Project: **5G Network Security using ML & DL**
 
