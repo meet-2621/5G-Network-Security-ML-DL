@@ -1,4 +1,6 @@
-# CPSS Group Project: 5G Network Security using ML & DL
+# Cyber Physical Systems & Security (CPSS) Group Project: 
+
+Title of Project: **5G Network Security using ML & DL**
 
 An AI-powered 5G network security system designed to detect and classify network attacks using **Machine Learning (ML), Deep Learning (DL), network traffic analysis, and an interactive web dashboard**.
 
