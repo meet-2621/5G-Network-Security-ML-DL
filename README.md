@@ -6,7 +6,7 @@ An AI-powered 5G network security system designed to detect and classify network
 
 ## 👥 Team Details
 
-### Project Team
+### Project Team - 2026
 
 | S. No. | Team Member        | Role / Responsibility                              |
 | -----: | ------------------ | -------------------------------------------------- |
