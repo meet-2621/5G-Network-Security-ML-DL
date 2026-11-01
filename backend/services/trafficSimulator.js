@@ -1,5 +1,11 @@
 const config = require('../config');
 const crypto = require('crypto');
+const firewall = require('./firewall');
+
+// Fake IPs for demo mode. Attackers come from a small pool so the same
+// IP repeats and the auto-block rule can trigger.
+const ATTACKER_POOL = ['203.0.113.10','203.0.113.25','198.51.100.7'];
+const randomNormalIp = () => `10.45.0.${2 + Math.floor(Math.random() * 200)}`;
 
 const TICK_INTERVAL = 500;
 const STATS_BROADCAST_INTERVAL = 3000;
@@ -27,6 +33,9 @@ class TrafficSimulator {
         const startTime = process.hrtime.bigint();
 
         const features = this._generateFeatures();
+        const simIp = this._lastWasAttack
+          ? ATTACKER_POOL[Math.floor(Math.random() * ATTACKER_POOL.length)]
+          : randomNormalIp();
 
         const result = await mlService.predict(features);
 
@@ -42,10 +51,14 @@ class TrafficSimulator {
           prediction: result.prediction,
           confidence: result.confidence,
           probabilities: result.probabilities,
-          processingTime
+          processingTime,
+          source_ip: simIp,
+          simulated: true
         };
 
         dataStore.addTraffic(event);
+        await firewall.handleDetection(event);
+        event.blocked = firewall.isBlocked(simIp);
 
         io.emit('traffic-event', event);
 
@@ -90,6 +103,7 @@ class TrafficSimulator {
     const isAttack = Math.random() < 0.30;
 
     let attackType = null;
+    this._lastWasAttack = isAttack;
 
     if (isAttack) {
       const types = [
