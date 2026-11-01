@@ -103,6 +103,8 @@ def extract_features_from_pcap(pcap_path: str) -> list[dict]:
         payload_entropy = calculate_entropy(fd['payloads'])
 
         features_list.append({
+            'src_ip': flow_key[0],
+            'dst_ip': flow_key[1],
             'packet_size': packet_size,
             'flow_duration': round(flow_duration, 4),
             'packet_rate': round(packet_rate, 2),
