@@ -47,3 +47,5 @@ build/
 # Temporary files
 *.tmp
 *.temp
+# Firewall runtime data
+backend/data/blocklist.json
