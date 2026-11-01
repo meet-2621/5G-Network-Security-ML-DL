@@ -136,11 +136,46 @@
                                 <th>Size</th>
                                 <th>Classification</th>
                                 <th>Confidence</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="traffic-feed-body">
                         </tbody>
                     </table>
+                </div>
+            </section>
+
+
+            <section class="panel firewall-panel fade-in span-2-cols" style="animation-delay: 0.35s;">
+                <header class="panel-header">
+                    <h2>Blocked IPs (Firewall)</h2>
+                    <div class="panel-actions">
+                        <span class="badge" id="fw-mode-badge">…</span>
+                        <span class="badge" id="fw-count-badge">0 blocked</span>
+                    </div>
+                </header>
+                <div class="panel-content">
+                    <div class="fw-add">
+                        <input type="text" id="fw-ip-input" placeholder="Enter IPv4 to block, e.g. 203.0.113.10" autocomplete="off">
+                        <button class="fw-btn fw-btn-danger" id="fw-block-btn">Block IP</button>
+                    </div>
+                    <div class="table-container fw-table-wrap">
+                        <table class="traffic-table">
+                            <thead>
+                                <tr>
+                                    <th>IP Address</th>
+                                    <th>Attack</th>
+                                    <th>Blocked At</th>
+                                    <th>By</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fw-body">
+                                <tr><td colspan="6" class="fw-empty">No IPs blocked yet</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -177,6 +212,7 @@
 
     <script src="js/api.js"></script>
     <script src="js/charts.js"></script>
+    <div id="toast-area"></div>
     <script src="js/app.js"></script>
 </body>
 </html>
