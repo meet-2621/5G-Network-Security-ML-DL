@@ -14,6 +14,8 @@ const trafficRoutes = require('./routes/traffic');
 const statsRoutes = require('./routes/stats');
 const networkRoutes = require('./routes/network');
 const captureRoutes = require('./routes/capture');
+const firewallRoutes = require('./routes/firewall');
+const firewall = require('./services/firewall');
 
 const errorHandler = require('./middleware/errorHandler');
 
@@ -36,6 +38,7 @@ app.use('/api/traffic', trafficRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/network', networkRoutes);
 app.use('/api/capture', captureRoutes);
+app.use('/api/firewall', firewallRoutes);
 
 app.use(errorHandler);
 
@@ -50,6 +53,7 @@ io.on('connection', (socket) => {
 });
 
 global.io = io;
+firewall.init(io);
 
 trafficSimulator.start(io, dataStore, mlService);
 
