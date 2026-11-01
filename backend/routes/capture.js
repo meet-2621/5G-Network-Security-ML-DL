@@ -3,6 +3,7 @@ const router = express.Router();
 const crypto = require('crypto');
 const mlService = require('../services/mlService');
 const dataStore = require('../services/dataStore');
+const firewall = require('../services/firewall');
 
 router.post('/', async (req, res, next) => {
   try {
@@ -32,10 +33,14 @@ router.post('/', async (req, res, next) => {
         confidence: result.confidence,
         probabilities: result.probabilities,
         processingTime,
-        source: 'pcap_capture'
+        source: 'pcap_capture',
+        source_ip: feat.src_ip || null,
+        dest_ip: feat.dst_ip || null
       };
 
       dataStore.addTraffic(event);
+      await firewall.handleDetection(event);   // <-- block attacker if rules match
+      event.blocked = firewall.isBlocked(event.source_ip);
 
       if (global.io) {
         global.io.emit('traffic-event', event);
