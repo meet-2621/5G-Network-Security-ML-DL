@@ -1,0 +1,933 @@
+
+/* =========================================================
+   1. GLOBAL SETTINGS AND THEME
+========================================================= */
+
+:root {
+    --bg-primary: #080d18;
+    --bg-secondary: #0d1525;
+    --bg-panel: #111c2e;
+    --bg-card: #17243a;
+    --bg-hover: #1d2c44;
+
+    --border: rgba(148, 163, 184, 0.14);
+    --border-light: rgba(148, 163, 184, 0.22);
+
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --cyan: #00d4ff;
+    --purple: #8b5cf6;
+    --green: #10b981;
+    --red: #ef4444;
+    --orange: #f59e0b;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+
+    --radius: 12px;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   2. DASHBOARD CONTAINER
+========================================================= */
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+.span-2-cols {
+    grid-column: span 2;
+}
+
+
+/* =========================================================
+   3. TOP HEADER
+========================================================= */
+
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+
+    background: linear-gradient(
+        135deg,
+        #111c2e,
+        #101a2c
+    );
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.shield-icon {
+    width: 42px;
+    height: 42px;
+    color: var(--cyan);
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.35));
+}
+
+.title-container h1 {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    display: block;
+    margin-top: 3px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.status-indicator {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--red);
+}
+
+.status-indicator.active {
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+    animation: statusPulse 2s infinite;
+}
+
+.status-indicator.offline {
+    background: var(--red);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+.clock-display {
+    padding: 9px 14px;
+    background: rgba(0, 212, 255, 0.07);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    color: var(--cyan);
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================================
+   4. COMMON PANEL DESIGN
+========================================================= */
+
+.panel {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.panel:hover {
+    border-color: var(--border-light);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-header h2 {
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+.panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: rgba(0, 212, 255, 0.09);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   5. NETWORK TOPOLOGY
+========================================================= */
+
+.topology-container {
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.topology-svg {
+    display: block;
+    width: 100%;
+    min-width: 600px;
+    height: auto;
+    max-height: 220px;
+}
+
+.conn-line {
+    fill: none;
+    stroke: rgba(0, 212, 255, 0.35);
+    stroke-width: 2;
+    stroke-dasharray: 7 5;
+    transition: stroke 0.3s ease;
+}
+
+.conn-line.active-traffic {
+    stroke: var(--cyan);
+    stroke-width: 3;
+    animation: trafficFlow 0.8s linear infinite;
+}
+
+.conn-line.attack-traffic {
+    stroke: var(--red);
+    stroke-width: 3;
+    animation: trafficFlow 0.5s linear infinite;
+}
+
+.node {
+    transition: all 0.3s ease;
+}
+
+.node-rect {
+    fill: #172b43;
+    stroke: var(--cyan);
+    stroke-width: 1.5;
+    transition: all 0.3s ease;
+}
+
+.node-text {
+    fill: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.node.active .node-rect {
+    stroke: var(--green);
+    fill: rgba(16, 185, 129, 0.12);
+}
+
+.node.attack .node-rect {
+    stroke: var(--red);
+    fill: rgba(239, 68, 68, 0.18);
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.7));
+}
+
+.node.ml-node .node-rect {
+    stroke: var(--purple);
+    fill: rgba(139, 92, 246, 0.15);
+}
+
+
+/* =========================================================
+   6. SYSTEM STATISTICS
+========================================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.stat-card {
+    position: relative;
+    min-width: 0;
+    padding: 17px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 212, 255, 0.35);
+}
+
+.stat-title {
+    margin-bottom: 9px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: var(--text-primary);
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+
+.danger-stat .stat-value {
+    color: var(--red);
+}
+
+.progress-ring-container {
+    width: 44px;
+    height: 44px;
+    margin-top: 12px;
+}
+
+.circular-chart {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: rgba(148, 163, 184, 0.15);
+    stroke-width: 3;
+}
+
+.circle {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+
+/* =========================================================
+   7. TABLES
+========================================================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+
+.traffic-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.traffic-table th {
+    padding: 13px 16px;
+    background: rgba(15, 23, 42, 0.55);
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+}
+
+.traffic-table td {
+    padding: 13px 16px;
+    color: var(--text-primary);
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.traffic-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.traffic-table tbody tr:hover {
+    background: rgba(148, 163, 184, 0.06);
+}
+
+.traffic-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.row-attack {
+    background: rgba(239, 68, 68, 0.045);
+}
+
+.row-normal {
+    background: transparent;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.tag-normal {
+    color: var(--green);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+}
+
+.tag-attack {
+    color: var(--red);
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.22);
+}
+
+.fw-empty {
+    padding: 25px !important;
+    color: var(--text-muted) !important;
+    text-align: center;
+}
+
+
+/* =========================================================
+   8. CHARTS
+========================================================= */
+
+.chart-container {
+    position: relative;
+    min-width: 0;
+    min-height: 280px;
+    padding: 20px;
+}
+
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+}
+
+.chart-center-text {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-primary);
+    font-size: 24px;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.timeline-chart-wrapper {
+    min-height: 300px;
+}
+
+
+/* =========================================================
+   9. MODEL PERFORMANCE CHART
+========================================================= */
+
+.model-panel {
+    min-width: 0;
+}
+
+.model-chart-wrapper {
+    min-height: 340px;
+    padding: 24px;
+}
+
+.model-chart-wrapper canvas {
+    max-height: 340px;
+}
+
+
+/* =========================================================
+   10. MODEL EVALUATION TABLE
+========================================================= */
+
+.model-evaluation-panel {
+    grid-column: span 2;
+    min-width: 0;
+}
+
+.model-table-wrap {
+    max-height: 350px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.model-evaluation-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+.model-evaluation-table th,
+.model-evaluation-table td {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.model-evaluation-table th:first-child,
+.model-evaluation-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+}
+
+.model-evaluation-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.best-model-row {
+    background: rgba(16, 185, 129, 0.10);
+}
+
+.best-model-row td {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.model-evaluation-table tbody tr:hover {
+    background: rgba(0, 212, 255, 0.06);
+}
+
+
+/* =========================================================
+   11. FIREWALL PANEL COMPATIBILITY
+========================================================= */
+
+.firewall-panel {
+    min-width: 0;
+}
+
+.firewall-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.firewall-status .status-indicator {
+    flex-shrink: 0;
+}
+
+.firewall-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.firewall-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.firewall-item span {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.firewall-item strong {
+    color: var(--text-primary);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   12. ANIMATIONS
+========================================================= */
+
+.fade-in {
+    animation: fadeIn 0.65s ease both;
+}
+
+.slide-in {
+    animation: slideIn 0.35s ease both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(16, 185, 129, 0.45);
+    }
+
+    50% {
+        box-shadow: 0 0 13px rgba(16, 185, 129, 0.9);
+    }
+}
+
+@keyframes trafficFlow {
+    to {
+        stroke-dashoffset: -24;
+    }
+}
+
+
+/* =========================================================
+   13. SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+
+/* =========================================================
+   14. RESPONSIVE DESIGN - TABLETS
+========================================================= */
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .dashboard-container {
+        padding: 18px;
+    }
+
+    .model-evaluation-panel {
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================================
+   15. RESPONSIVE DESIGN - MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 12px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .span-2-cols,
+    .model-evaluation-panel {
+        grid-column: span 1;
+    }
+
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .header-controls {
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .title-container h1 {
+        font-size: 19px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-value {
+        font-size: 21px;
+    }
+
+    .panel-header {
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+
+    .panel-content {
+        padding: 15px;
+    }
+
+    .chart-container {
+        min-height: 260px;
+        padding: 12px;
+    }
+
+    .model-chart-wrapper {
+        min-height: 360px;
+    }
+
+    .timeline-chart-wrapper {
+        min-height: 260px;
+    }
+
+    .topology-container {
+        min-height: 180px;
+    }
+
+    .topology-svg {
+        min-width: 600px;
+    }
+}
+
+
+/* =========================================================
+   16. SMALL MOBILE SCREENS
+========================================================= */
+
+@media (max-width: 420px) {
+    .dashboard-container {
+        padding: 8px;
+    }
+
+    .top-header {
+        padding: 13px;
+    }
+
+    .logo-area {
+        gap: 10px;
+    }
+
+    .shield-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .title-container h1 {
+        font-size: 17px;
+    }
+
+    .header-controls {
+        flex-wrap: wrap;
+    }
+
+    .clock-display {
+        font-size: 13px;
+    }
+
+    .stats-grid {
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-title {
+        font-size: 10px;
+    }
+
+    .stat-value {
+        font-size: 19px;
+    }
+
+    .panel-header h2 {
+        font-size: 14px;
+    }
+
+    .badge {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   17. ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* Firewall block status and action controls */
+.fw-add {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.fw-add input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+.fw-btn {
+    border: 0;
+    border-radius: 7px;
+    padding: 9px 13px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+}
+.fw-btn:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+.fw-btn-danger { background: #dc2626; }
+.fw-btn-secondary { background: #475569; }
+.tag-blocked { background: rgba(239,68,68,.18); color: #f87171; }
+.tag-pending { background: rgba(245,158,11,.16); color: #fbbf24; }
+#toast-area {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    display: grid;
+    gap: 8px;
+}
+.toast {
+    padding: 11px 15px;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #f8fafc;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    border: 1px solid #475569;
+}
+.toast-success { border-color: #10b981; }
+.toast-error { border-color: #ef4444; }
+@media (max-width: 560px) {
+    .fw-add { flex-direction: column; }
+}
